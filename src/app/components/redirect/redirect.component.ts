@@ -26,7 +26,7 @@ export class RedirectComponent implements OnInit {
       (response) => {
         setTimeout(() => {
           window.location.href = response;
-        }, 3000);
+        }, 500);
       },
       (error) => {
         setTimeout(() => {

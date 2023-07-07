@@ -1,3 +1,4 @@
+@import "../../variables";
 body {
   background-color: #444442;
   padding-top: 85px;
@@ -6,8 +7,8 @@ body {
 h1 {
   font-family: "Poppins", sans-serif, "arial";
   font-weight: 600;
-  font-size: 72px;
-  color: white;
+  font-size: 40px;
+  color: $heading-color2;
   text-align: center;
 }
 
@@ -15,8 +16,8 @@ h4 {
   font-family: "Roboto", sans-serif, "arial";
   font-weight: 400;
   font-size: 20px;
-  color: #9b9b9b;
-  line-height: 1.5;
+  color: rgba(0, 32, 128, 0.653);
+  line-height: 1;
 }
 
 /* ///// inputs /////*/
@@ -25,9 +26,8 @@ input:focus ~ label,
 textarea:focus ~ label,
 input:valid ~ label,
 textarea:valid ~ label {
-  font-size: 0.75em;
-  color: #999;
-  top: -5px;
+  font-size: 0.65em;
+  top: -13px;
   -webkit-transition: all 0.225s ease;
   transition: all 0.225s ease;
 }
@@ -47,10 +47,9 @@ textarea:valid ~ label {
 }
 
 .styled-input label {
-  color: #999;
-  padding: 1.3rem 30px 1rem 30px;
+  color: $tab;
+  padding: 1rem 15px 1rem 30px;
   position: absolute;
-  top: 10px;
   left: 0;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
@@ -64,11 +63,11 @@ textarea:valid ~ label {
 
 input,
 textarea {
-  padding: 30px;
+  padding: 15px;
   border: 0;
   width: 100%;
   font-size: 1rem;
-  background-color: #2d2d2d;
+  background-color: $bg-color2;
   color: white;
   border-radius: 4px;
 }
@@ -87,7 +86,7 @@ textarea:focus ~ span {
 
 textarea {
   width: 100%;
-  min-height: 15em;
+  min-height: 10em;
 }
 
 .input-container {
@@ -99,9 +98,9 @@ textarea {
 .submit-btn {
   float: right;
   padding: 7px 35px;
-  border-radius: 60px;
+  border-radius: 5px;
   display: inline-block;
-  background-color: #4b8cfb;
+  background-color: $heading-color2;
   color: white;
   font-size: 18px;
   cursor: pointer;
@@ -112,6 +111,7 @@ textarea {
 
 .submit-btn:hover {
   transform: translateY(1px);
+  background-color: $bg-color3;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.09);
 }
 

@@ -8,10 +8,12 @@
   </div>
   <!-- End Logo -->
   <div class="ms-auto mx-3" *ngIf="!loggedIn; else otherBlock">
-    <a class="btn solid_btn rounded-pill px-4 mx-2" routerLink="signup"
+    <a class="btn btn-light rounded-pill px-4 mx-2" routerLink="signup"
       >Signup</a
     >
-    <a class="btn outline_btn rounded-pill px-4" routerLink="login">Login</a>
+    <a class="btn btn-outline-light rounded-pill px-4" routerLink="login"
+      >Login</a
+    >
   </div>
 
   <ng-template #otherBlock>
