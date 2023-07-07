@@ -1,8 +1,7 @@
+@import "../../variables";
 .container {
   position: relative;
-  @media screen and (max-width: 300px) {
-    top: 40px;
-  }
+  // top: 60px;
 }
 
 .ticked {
@@ -22,40 +21,10 @@ section {
 .section-heading {
   font-size: 3rem;
   font-weight: 700;
-  background: linear-gradient(-45deg, #3db3c5, #274685);
+  background: linear-gradient(-45deg, $heading-color2, $heading-color1);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.back-to-top {
-  position: fixed;
-  visibility: hidden;
-  opacity: 0;
-  right: 15px;
-  bottom: 15px;
-  z-index: 996;
-  background: #2d71a1;
-  width: 40px;
-  height: 40px;
-  border-radius: 50px;
-  transition: all 0.4s;
-
-  i {
-    font-size: 28px;
-    color: #fff;
-    line-height: 0;
-  }
-
-  &:hover {
-    background: #3687c1;
-    color: #fff;
-  }
-
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
 }
 
 .feature-1 {
@@ -66,13 +35,13 @@ section {
     border-radius: 50%;
     position: relative;
     margin-bottom: 30px;
-    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.3);
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     &.icon-1 {
-      background: linear-gradient(-45deg, #3b87bd, #2d71a2);
+      background: linear-gradient(-45deg, $heading-color2, $heading-color1);
     }
 
     i {
@@ -83,11 +52,13 @@ section {
   }
 
   h3 {
-    font-size: 20px;
+    font-size: 23px;
+    font-weight: bold;
+    color: $heading-color2;
   }
 
   p {
-    color: #b1b1b1;
+    color: $heading-color1;
   }
 }
 
@@ -113,13 +84,21 @@ section {
     transform: rotate(360deg);
   }
 }
-
+input::placeholder {
+  color: $bg-color1;
+}
+.input-group .input-group-text {
+  border: 1px solid $heading-color1;
+  border-radius: 0;
+  background: none;
+  i {
+    font-size: 20px;
+    text-align: center;
+    color: $heading-color2;
+  }
+}
 .hero-section {
-  background: linear-gradient(
-      to right,
-      rgba(39, 70, 133, 0.8) 0%,
-      rgba(61, 179, 197, 0.8) 100%
-    ),
+  background: linear-gradient(to right, $bg-color1 0%, $bg-color2 100%),
     url(../../../assets//home/hero-bg.jpg);
   position: relative;
 
@@ -129,6 +108,9 @@ section {
     position: absolute;
     z-index: 1;
     bottom: -150px;
+    @media screen and (max-width: 1200px) {
+      display: none;
+    }
 
     svg {
       width: 100%;
@@ -139,9 +121,8 @@ section {
   &,
   > .container > .row {
     height: 100vh;
-    // min-height: 750px;
-    @media screen and (max-width: 991px) {
-      height: 90vh;
+    @media screen and (max-width: 1200px) {
+      height: 450px;
     }
   }
 
@@ -172,21 +153,14 @@ section {
   .iphone-wrap {
     position: relative;
 
-    .phone-2,
     .phone-1 {
       top: -50%;
       overflow: hidden;
       left: 0;
       border-radius: 30px;
-    }
-
-    .phone-2,
-    .phone-1 {
       width: 400px;
-      @media screen and (max-width: 991px) {
-        display: block;
-        margin: auto;
-        width: 70%;
+      @media screen and (max-width: 950px) {
+        display: none;
       }
     }
   }
@@ -194,8 +168,8 @@ section {
 
 footer {
   padding: 30px 10px;
-  background: #fff;
-  color: #000000;
+  background: $heading-color2;
+  color: #fff;
 
   ul li {
     margin-bottom: 10px;
@@ -203,6 +177,7 @@ footer {
     a {
       text-decoration: none;
       cursor: pointer;
+      color: #fff;
     }
   }
 }
