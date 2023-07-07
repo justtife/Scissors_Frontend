@@ -1,12 +1,18 @@
 .toggle-sidebar-btn {
+  position: fixed;
+  z-index: 3;
+  top: 5px;
+  left: 60px;
   font-size: 32px;
   padding-left: 10px;
   cursor: pointer;
-  color: #012970;
+  color: #fff;
   display: none;
-
   @media (max-width: 1199px) {
     display: block;
+  }
+  @media screen and (min-width: 1000px) {
+    left: 180px;
   }
 }
 

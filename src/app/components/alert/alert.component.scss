@@ -32,3 +32,29 @@
     transform: translateX(0);
   }
 }
+.alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px dashed #000;
+}
+
+.alert .bi {
+  margin-right: 0.5rem;
+}
+
+.alert .message {
+  flex-grow: 1;
+}
+
+.timer-bar {
+  width: 100px; /* Adjust the width as needed */
+  height: 2px;
+  background-color: #ccc;
+  margin: 0 0.5rem;
+}
+
+.btn-close {
+  margin-left: 0.5rem;
+}

@@ -8,7 +8,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserComponent } from './pages/user/user.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SupportComponent } from './pages/support/support.component';
+import { RedirectComponent } from './components/redirect/redirect.component';
+import { QrcodeComponent } from './pages/qrcode/qrcode.component';
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: '',
     component: DashboardComponent,
@@ -16,12 +19,14 @@ const routes: Routes = [
       { path: 'dashboard', component: SubDashComponent },
       { path: 'profile', component: UserComponent },
       { path: 'support', component: SupportComponent },
+      { path: 'qrcode', component: QrcodeComponent },
     ],
   },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+  { path: '**', component: RedirectComponent },
 ];
 
 @NgModule({
