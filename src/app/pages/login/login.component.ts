@@ -37,4 +37,9 @@ export class LoginComponent {
       console.log(err);
     }
   }
+  initiateGoogleAuth() {
+    this.http.initiateGoogleAuth().subscribe((response) => {
+      console.log(response);
+    });
+  }
 }

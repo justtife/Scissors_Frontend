@@ -12,6 +12,7 @@ const httpOptions = {
 })
 export class UserService {
   private apiUrl = 'https://shortify-7orn.onrender.com/api/v1/user/'; // Replace with your API endpoint URL
+  private mainUrl = 'https://shortify-7orn.onrender.com/'; // Replace with your API endpoint URL
   private countryURL = 'https://restcountries.com/v3.1/all';
   constructor(private http: HttpClient) {}
   private getHttpOptions(): any {
@@ -52,6 +53,9 @@ export class UserService {
       userData,
       this.getHttpOptions()
     );
+  }
+  initiateGoogleAuth() {
+    return this.http.get(this.mainUrl + 'auth/google');
   }
   logout(): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'logout', 'logout');

@@ -1,9 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-@import '~aos/dist/aos.css';
-
+@import "~aos/dist/aos.css";
+@import "./app/variables";
 /* You can add global styles to this file, and also import other style files */
-
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +13,11 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f9fa !important;
-  color: rgb(58, 27, 185);
+  color: $heading-color1;
+  background: red;
+}
+h3 {
+  color: $heading-color2;
 }
 .main {
   position: relative;
@@ -86,6 +89,7 @@ form {
       padding: 0.05rem 0.75rem;
       pointer-events: none;
       color: #6c757d;
+      width: auto;
       opacity: 1;
       transition: all 0.2s;
       transform-origin: top left;
@@ -109,12 +113,12 @@ form {
       &[type="text"],
       &[type="email"],
       &[type="password"] {
-        border: 1px solid rgb(31, 2, 144);
+        border: 1px solid $heading-color2;
         background: none;
         font-weight: bold;
       }
       &:focus {
-        border: 2px solid rgb(58, 27, 185);
+        border: 2px solid $bg-color2;
         box-shadow: none;
       }
       &:focus ~ label,
@@ -124,15 +128,33 @@ form {
     }
   }
   button {
-    border: 1px solid rgb(31, 2, 144) !important;
-    color: rgb(31, 2, 144) !important;
+    border: 1px solid $heading-color2 !important;
+    color: $heading-color2 !important;
     letter-spacing: 2px;
     font-weight: bold;
     height: 3rem;
     &:hover {
-      background: rgb(31, 2, 144) !important;
+      background: $heading-color2 !important;
       color: #f8f9fa !important;
     }
+  }
+}
+.solid_btn {
+  background-color: $heading-color2 !important;
+  color: white;
+  padding: 8px 40px;
+  &:hover {
+    color: white;
+    background-color: $heading-color1 !important;
+  }
+}
+.outline_btn {
+  border: 1px solid $heading-color2 !important;
+  color: $heading-color2 !important;
+  padding: 8px 40px;
+  &:hover {
+    background: $heading-color2 !important;
+    color: #f8f9fa !important;
   }
 }
 
