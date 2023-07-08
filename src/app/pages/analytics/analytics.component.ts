@@ -9,6 +9,7 @@ import { UrlServiceService } from 'src/app/services/url-service.service';
 export class AnalyticsComponent implements OnInit {
   ngOnInit(): void {
     this.getUserUrl();
+    this.getUserQrCode();
   }
   urls: any;
   paginations: any;
@@ -17,6 +18,8 @@ export class AnalyticsComponent implements OnInit {
   num = [1, 2, 3, 4];
   selectedPage: number = 0;
   modalOutput: any = { qrcode: '' };
+  qrCode: any = {};
+  qrCodeDetails: any;
 
   constructor(private http: UrlServiceService) {}
   generateArray(length: number): number[] {
@@ -34,6 +37,19 @@ export class AnalyticsComponent implements OnInit {
         },
         (error) => {
           this.urls = null;
+        }
+      );
+    }
+  }
+  getUserQrCode() {
+    const userID = localStorage.getItem('userID');
+    if (userID) {
+      this.http.getUserQrCode(userID).subscribe(
+        (response) => {
+          this.qrCodeDetails = response.data;
+        },
+        (error) => {
+          this.qrCode = null;
         }
       );
     }

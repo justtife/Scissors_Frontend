@@ -17,7 +17,7 @@
                   <i class="bi bi-graph-up"></i>
                 </div>
                 <div class="ps-3">
-                  <h4>{{ urls?.count || 0 }}</h4>
+                  <h4>{{ urls?.count || "-" }}</h4>
                   <span class="text-success small pt-1 fw-bold">Total</span>
                   <span class="text-muted small pt-2 ps-1">Links</span>
                 </div>
@@ -37,7 +37,7 @@
                   <i class="bi bi-qr-code"></i>
                 </div>
                 <div class="ps-3">
-                  <h4>{{ qrCodeDetails?.length || 0 }}</h4>
+                  <h4>{{ qrCodeDetails?.count || "-" }}</h4>
                   <span class="text-success small pt-1 fw-bold">Total</span>
                   <span class="text-muted small pt-2 ps-1">QrCodes</span>
                 </div>
@@ -256,13 +256,16 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Latest QrCode</h5>
-          <h2 class="text-center" *ngIf="!qrCode; else NoQrCode">
+          <h2
+            class="text-center"
+            *ngIf="qrCodeDetails?.count < 1; else NoQrCode"
+          >
             No Qr Code has been generated yet
           </h2>
           <ng-template #NoQrCode>
             <div class="card bg-transparent">
               <img
-                [src]="qrCode?.qrcode"
+                [src]="qrCodeDetails?.urls[0].qrcode"
                 class="card-img-top"
                 alt="Qr code of short link"
               />
@@ -272,25 +275,25 @@
                   <strong>Short URL:</strong>
                 </p>
                 <p class="card-text">
-                  <a [routerLink]="'/' + qrCode?.short_url"
-                    >{{ currentUrl }}/{{ qrCode?.short_url }}</a
+                  <a [routerLink]="'/' + qrCodeDetails?.urls[0].short_url"
+                    >{{ currentUrl }}/{{ qrCodeDetails?.urls[0].short_url }}</a
                   >
                 </p>
                 <p class="card-text">
                   <strong>Title:</strong>
                 </p>
-                <p class="card-text">{{ qrCode?.name }}</p>
-                <p *ngIf="qrCode?.description" class="card-text">
+                <p class="card-text">{{ qrCodeDetails?.urls[0].name }}</p>
+                <p *ngIf="qrCodeDetails?.urls[0].description" class="card-text">
                   <strong>Description:</strong>
                 </p>
-                <p class="card-text" *ngIf="qrCode?.description">
+                <p class="card-text" *ngIf="qrCodeDetails?.urls[0].description">
                   {{ qrCode?.description }}
                 </p>
-                <p class="card-text" *ngIf="qrCode?.tag != 0">
+                <p class="card-text" *ngIf="qrCodeDetails?.urls[0].tag != 0">
                   <strong>Tags:</strong>
                 </p>
-                <p class="card-text" *ngIf="qrCode?.tag != 0">
-                  {{ qrCode?.tag }}
+                <p class="card-text" *ngIf="qrCodeDetails?.urls[0].tag != 0">
+                  {{ qrCodeDetails?.urls[0].tag }}
                 </p>
               </div>
             </div>

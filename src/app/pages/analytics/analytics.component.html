@@ -12,7 +12,7 @@
                 <div class="card-icon">
                   <i class="bi bi-link-45deg"></i>
                 </div>
-                <h3>{{ urls?.count || 0 }}</h3>
+                <h3>{{ urls?.count || "-" }}</h3>
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
                 <div class="card-icon">
                   <i class="bi bi-qr-code"></i>
                 </div>
-                <h3>88</h3>
+                <h3>{{ qrCodeDetails?.count || "-" }}</h3>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@
                 <div class="card-icon">
                   <i class="bi bi-bar-chart"></i>
                 </div>
-                <h3>{{ urls?.totalClicks || 0 }}</h3>
+                <h3>{{ urls?.totalClicks || "-" }}</h3>
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@
                 <div class="card-icon">
                   <i class="bi bi-pen"></i>
                 </div>
-                <h3>{{ urls?.totalCustomField || 0 }}</h3>
+                <h3>{{ urls?.totalCustomField || "-" }}</h3>
               </div>
             </div>
           </div>
@@ -93,6 +93,18 @@
       <h3>Short URLs</h3>
       <div class="table-responsive">
         <div class="table-wrapper">
+          <div class="row mb-3 d-flex">
+            <label for="sex" class="col-form-label"
+              >Gender</label
+            >
+            <div class="">
+              <select name="sex" id="sex" class="form-control">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Rather Not say</option>
+              </select>
+            </div>
+          </div>
           <table class="table table-hover table-bordered">
             <thead>
               <tr>

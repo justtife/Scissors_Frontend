@@ -46,6 +46,7 @@ export class SubDashComponent implements OnInit {
     this.showModal = false;
     this.showResponse = false;
     this.response = {};
+    this.urlData = {};
     this.ngOnInit();
   }
   shortenUrl() {
@@ -55,6 +56,8 @@ export class SubDashComponent implements OnInit {
       this.isSubmitting = true;
       if (!this.urlData.short_url) {
         delete this.urlData.short_url;
+      } else {
+        this.urlData.short_url = this.urlData.short_url.toLowerCase();
       }
       this.http.shortenURL(this.urlData).subscribe(
         (response) => {
@@ -78,7 +81,7 @@ export class SubDashComponent implements OnInit {
   getUserUrl() {
     const userID = localStorage.getItem('userID');
     if (userID) {
-      this.http.getUserUrl(userID, '1').subscribe(
+      this.http.getUserUrl(userID).subscribe(
         (response) => {
           this.urls = response.data;
         },
@@ -93,7 +96,7 @@ export class SubDashComponent implements OnInit {
     if (userID) {
       this.http.getUserQrCode(userID).subscribe(
         (response) => {
-          this.qrCode = response.data.reverse()[0];
+          console.log(response.data);
           this.qrCodeDetails = response.data;
         },
         (error) => {

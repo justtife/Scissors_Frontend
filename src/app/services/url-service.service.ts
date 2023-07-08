@@ -28,15 +28,16 @@ export class UrlServiceService {
   getURL(userData: any): Observable<any> {
     return this.http.get(this.apiUrl + userData);
   }
-  getUserUrl(userID: any, query: string): Observable<any> {
+
+  getUserUrl(userID: any, query?: string): Observable<any> {
     return this.http.get(
-      this.apiUrl + `${userID}/url?skip=${query}`,
+      this.apiUrl + `${userID}/url?skip=${query || 1}`,
       this.getHttpOptions()
     );
   }
-  getUserQrCode(userID: any): Observable<any> {
+  getUserQrCode(userID: any, query?: string): Observable<any> {
     return this.http.get(
-      this.apiUrl + `${userID}/qrcode`,
+      this.apiUrl + `${userID}/qrcode?skip=${query || 1}`,
       this.getHttpOptions()
     );
   }

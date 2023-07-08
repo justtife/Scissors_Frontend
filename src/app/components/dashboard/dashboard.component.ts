@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user-service.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,15 +18,22 @@ export class DashboardComponent implements OnInit {
   };
   ngOnInit(): void {
     this.setLoading();
+    this.route.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.setLoading(event.url);
+      }
+    });
   }
-  setLoading() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 4000);
-  }
+
   constructor(private http: UserService, private route: Router) {}
   toggleWidth() {
     this.isWidthToggled = !this.isWidthToggled;
+  }
+  setLoading(url?: string) {
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 1500);
   }
   logout() {
     localStorage.removeItem('srstoken');
