@@ -12,7 +12,7 @@
                 <div class="card-icon">
                   <i class="bi bi-link-45deg"></i>
                 </div>
-                <h3>88</h3>
+                <h3>{{ urls?.count || 0 }}</h3>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@
                 <div class="card-icon">
                   <i class="bi bi-bar-chart"></i>
                 </div>
-                <h3>88</h3>
+                <h3>{{ urls?.totalClicks || 0 }}</h3>
               </div>
             </div>
           </div>
@@ -54,14 +54,41 @@
                 <div class="card-icon">
                   <i class="bi bi-pen"></i>
                 </div>
-                <h3>88</h3>
+                <h3>{{ urls?.totalCustomeField || 0 }}</h3>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+    <div
+      *ngIf="showModal"
+      class="modal fade show"
+      id="basicModal"
+      tabindex="-1"
+      [style.display]="showModal ? 'block' : 'none'"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">QrCode</h5>
+            <button
+              type="button"
+              class="btn-close"
+              (click)="cancelModal()"
+            ></button>
+          </div>
+          <div class="modal-body mx-3">
+            <div *ngIf="modalOutput.qrcode" class="card d-block mx-auto">
+              <div class="card-body d-flex flex-column align-items-center">
+                <img [src]="modalOutput.qrcode" alt="Profile" />
+                <h6>Qr Code</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-xl">
       <h3>Short URLs</h3>
       <div class="table-responsive">
@@ -78,35 +105,146 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let i of num">
+              <ng-container *ngFor="let url of urls?.urls; let i = index">
                 <tr>
-                  <td>num</td>
-                  <td>London</td>
-                  <td>London</td>
-                  <td>London</td>
-                  <td>London</td>
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <a [routerLink]="'/' + url.short_url" class="text-primary"
+                      >{{ currentUrl }}/{{ url.short_url }}</a
+                    >
+                  </td>
+                  <td>{{ url.name }}</td>
+                  <td
+                    *ngIf="url?.qrcode"
+                    class="text-primary"
+                    style="cursor: pointer; text-decoration: underline"
+                    (click)="displayQR(url?.qrcode)"
+                  >
+                    tap to view
+                  </td>
+                  <td
+                    *ngIf="!url.qrcode"
+                    class="text-primary"
+                    style="cursor: pointer; text-decoration: underline"
+                  >
+                    Generate
+                  </td>
+                  <td>{{ url.clicks }}</td>
                   <td>London</td>
                 </tr>
               </ng-container>
             </tbody>
           </table>
           <div class="clearfix">
+            <ng-container *ngIf="paginations > 1">
+              <ul class="pagination">
+                <li
+                  class="page-item"
+                  (click)="previousPage()"
+                  href="#"
+                  [class.disabled]="selectedPage === 1"
+                >
+                  <i class="bi bi-chevron-double-left"></i>
+                </li>
+                <ng-container
+                  *ngFor="let i of generateArray(paginations); let index"
+                >
+                  <li [class.active]="selectedPage === i + 1" class="page-item">
+                    <a
+                      (click)="getUserUrl((i + 1).toString())"
+                      class="page-link"
+                      >{{ i + 1 }}</a
+                    >
+                  </li>
+                </ng-container>
+                <li
+                  class="page-item"
+                  (click)="nextPage()"
+                  href="#"
+                  [class.disabled]="selectedPage === paginations"
+                >
+                  <i class="bi bi-chevron-double-right"></i>
+                </li>
+              </ul>
+            </ng-container>
+
             <div class="hint-text">
-              Showing <b>5</b> out of <b>25</b> entries
+              Page <b>{{ selectedPage }}</b> of
+              <b>{{ paginations }}</b>
             </div>
-            <ul class="pagination">
-              <li class="page-item disabled"><a href="#">Previous</a></li>
-              <li class="page-item"><a href="#" class="page-link">1</a></li>
-              <li class="page-item"><a href="#" class="page-link">2</a></li>
-              <li class="page-item"><a href="#" class="page-link">3</a></li>
-              <li class="page-item active">
-                <a href="#" class="page-link">4</a>
-              </li>
-              <li class="page-item"><a href="#" class="page-link">5</a></li>
-              <li class="page-item"><a href="#" class="page-link">6</a></li>
-              <li class="page-item"><a href="#" class="page-link">7</a></li>
-              <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-xl">
+      <h3>Views</h3>
+      <div class="table-responsive">
+        <div class="table-wrapper">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Short URL</th>
+                <th>Title</th>
+                <th>QR Code</th>
+                <th>Clicks</th>
+                <th>Tags</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let url of urls?.urls; let i = index">
+                <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <a [routerLink]="'/' + url.short_url" class="text-primary"
+                      >{{ currentUrl }}/{{ url.short_url }}</a
+                    >
+                  </td>
+                  <td>{{ url.name }}</td>
+                  <td>tap to view</td>
+                  <td>{{ url.clicks }}</td>
+                  <td>London</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <div class="clearfix">
+            <ng-container *ngIf="paginations > 1">
+              <ul class="pagination">
+                <li
+                  class="page-item"
+                  (click)="previousPage()"
+                  href="#"
+                  [class.disabled]="selectedPage === 1"
+                >
+                  <i class="bi bi-chevron-double-left"></i>
+                </li>
+                <ng-container
+                  *ngFor="let i of generateArray(paginations); let index"
+                >
+                  <li [class.active]="selectedPage === i + 1" class="page-item">
+                    <a
+                      (click)="getUserUrl((i + 1).toString())"
+                      class="page-link"
+                      >{{ i + 1 }}</a
+                    >
+                  </li>
+                </ng-container>
+                <li
+                  class="page-item"
+                  (click)="nextPage()"
+                  href="#"
+                  [class.disabled]="selectedPage === paginations"
+                >
+                  <i class="bi bi-chevron-double-right"></i>
+                </li>
+              </ul>
+            </ng-container>
+
+            <div class="hint-text">
+              Page <b>{{ selectedPage }}</b> of
+              <b>{{ paginations }}</b>
+            </div>
           </div>
         </div>
       </div>

@@ -80,8 +80,6 @@ export class SubDashComponent implements OnInit {
     if (userID) {
       this.http.getUserUrl(userID, '1').subscribe(
         (response) => {
-          console.log('Made Request');
-          console.log(response.data);
           this.urls = response.data;
         },
         (error) => {
