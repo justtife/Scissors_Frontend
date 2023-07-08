@@ -33,7 +33,9 @@ export class HomeComponent implements OnInit {
     this.error = {};
     this.http.shortenURL(this.urlData).subscribe(
       (response) => {
-        this.newLink = `scissors-six.vercel.app/${response.data.short_url}`;
+        this.newLink = `${window.location.origin.replace(/^https?:\/\//, '')}/${
+          response.data.short_url
+        }`;
         this.clipboardIcon = 'bi-clipboard2';
         this.isSubmitting = false;
       },
@@ -53,14 +55,15 @@ export class HomeComponent implements OnInit {
       let trial = localStorage.getItem('trial');
       if (!trial) {
         localStorage.setItem('trial', '1');
+        this.createShortURL();
       } else {
         let count = parseInt(trial as string);
-        count++;
-        localStorage.setItem('trial', count.toString());
         if (count > 3) {
           this.route.navigate(['login']);
         } else {
           this.createShortURL();
+          count++;
+          localStorage.setItem('trial', count.toString());
         }
       }
     } else {
