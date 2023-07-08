@@ -17,7 +17,7 @@
                   <i class="bi bi-graph-up"></i>
                 </div>
                 <div class="ps-3">
-                  <h4>{{ urls?.length || 0 }}</h4>
+                  <h4>{{ urls?.count || 0 }}</h4>
                   <span class="text-success small pt-1 fw-bold">Total</span>
                   <span class="text-muted small pt-2 ps-1">Links</span>
                 </div>
@@ -309,8 +309,8 @@
           <h2 class="text-center" *ngIf="!urls; else urlTable">
             No Url created yet
           </h2>
-          <ng-template #urlTable
-            ><table class="table table-borderless datatable">
+          <ng-template #urlTable>
+            <table class="table table-borderless datatable">
               <thead>
                 <tr>
                   <th scope="col">S/N</th>
@@ -319,7 +319,7 @@
                   <th scope="col">Clicks</th>
                 </tr>
               </thead>
-              <tbody *ngFor="let url of urls; let i = index">
+              <tbody *ngFor="let url of urls.urls; let i = index">
                 <tr>
                   <th scope="row">
                     {{ i + 1 }}
@@ -338,6 +338,9 @@
             </table></ng-template
           >
         </div>
+        <p *ngIf="urls?.count > 5" class="px-3">
+          <a routerLink="/analytics">view {{ urls.count - 5 }} more rows</a>
+        </p>
       </div>
     </div>
     <!-- End Recent Sales -->

@@ -24,8 +24,10 @@ export class SubDashComponent implements OnInit {
   response: any;
   constructor(private http: UrlServiceService, private route: Router) {}
   ngOnInit() {
-    this.getUserUrl();
-    this.getUserQrCode();
+    setTimeout(() => {
+      this.getUserUrl();
+      this.getUserQrCode();
+    });
   }
   convertToLower(value: string) {
     this.inputText = value.toLowerCase();
@@ -74,19 +76,19 @@ export class SubDashComponent implements OnInit {
     }
   }
   getUserUrl() {
-    setTimeout(() => {
-      const userID = localStorage.getItem('userID');
-      if (userID) {
-        this.http.getUserUrl(userID).subscribe(
-          (response) => {
-            this.urls = response.data.reverse();
-          },
-          (error) => {
-            this.urls = null;
-          }
-        );
-      }
-    });
+    const userID = localStorage.getItem('userID');
+    if (userID) {
+      this.http.getUserUrl(userID, '1').subscribe(
+        (response) => {
+          console.log('Made Request');
+          console.log(response.data);
+          this.urls = response.data;
+        },
+        (error) => {
+          this.urls = null;
+        }
+      );
+    }
   }
   getUserQrCode() {
     const userID = localStorage.getItem('userID');
@@ -94,7 +96,6 @@ export class SubDashComponent implements OnInit {
       this.http.getUserQrCode(userID).subscribe(
         (response) => {
           this.qrCode = response.data.reverse()[0];
-          console.log(this.qrCode);
           this.qrCodeDetails = response.data;
         },
         (error) => {

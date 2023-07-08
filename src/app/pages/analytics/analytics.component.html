@@ -1,1 +1,115 @@
-<p>analytics works!</p>
+<section class="section analytics">
+  <div class="row">
+    <!-- Left side columns -->
+    <div class="col-lg-12">
+      <h3>Stats</h3>
+      <div class="row">
+        <div class="col-xxl-3 col-md-3">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Short URL</h5>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="card-icon">
+                  <i class="bi bi-link-45deg"></i>
+                </div>
+                <h3>88</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-md-3">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Qr Code</h5>
+
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="card-icon">
+                  <i class="bi bi-qr-code"></i>
+                </div>
+                <h3>88</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-md-3">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Clicks</h5>
+
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="card-icon">
+                  <i class="bi bi-bar-chart"></i>
+                </div>
+                <h3>88</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-3 col-md-3">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Custom URL</h5>
+
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="card-icon">
+                  <i class="bi bi-pen"></i>
+                </div>
+                <h3>88</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-xl">
+      <h3>Short URLs</h3>
+      <div class="table-responsive">
+        <div class="table-wrapper">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Short URL</th>
+                <th>Title</th>
+                <th>QR Code</th>
+                <th>Clicks</th>
+                <th>Tags</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let i of num">
+                <tr>
+                  <td>num</td>
+                  <td>London</td>
+                  <td>London</td>
+                  <td>London</td>
+                  <td>London</td>
+                  <td>London</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <div class="clearfix">
+            <div class="hint-text">
+              Showing <b>5</b> out of <b>25</b> entries
+            </div>
+            <ul class="pagination">
+              <li class="page-item disabled"><a href="#">Previous</a></li>
+              <li class="page-item"><a href="#" class="page-link">1</a></li>
+              <li class="page-item"><a href="#" class="page-link">2</a></li>
+              <li class="page-item"><a href="#" class="page-link">3</a></li>
+              <li class="page-item active">
+                <a href="#" class="page-link">4</a>
+              </li>
+              <li class="page-item"><a href="#" class="page-link">5</a></li>
+              <li class="page-item"><a href="#" class="page-link">6</a></li>
+              <li class="page-item"><a href="#" class="page-link">7</a></li>
+              <li class="page-item"><a href="#" class="page-link">Next</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

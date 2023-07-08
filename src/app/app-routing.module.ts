@@ -10,16 +10,20 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SupportComponent } from './pages/support/support.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 import { QrcodeComponent } from './pages/qrcode/qrcode.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: '',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: SubDashComponent },
       { path: 'profile', component: UserComponent },
       { path: 'support', component: SupportComponent },
       { path: 'qrcode', component: QrcodeComponent },
+      { path: 'analytics', component: AnalyticsComponent },
     ],
   },
   { path: 'not-found', component: NotFoundComponent },

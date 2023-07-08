@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UrlServiceService {
-  private apiUrl = 'https://shortify-7orn.onrender.com/api/v1/url/'; // Replace with your API endpoint URL
+  private apiUrl = 'http://localhost:7789/api/v1/url/'; // Replace with your API endpoint URL
   constructor(private http: HttpClient) {}
   private getHttpOptions(): any {
     const token = localStorage.getItem('srstoken');
@@ -28,8 +28,11 @@ export class UrlServiceService {
   getURL(userData: any): Observable<any> {
     return this.http.get(this.apiUrl + userData);
   }
-  getUserUrl(userID: any): Observable<any> {
-    return this.http.get(this.apiUrl + `${userID}/url`, this.getHttpOptions());
+  getUserUrl(userID: any, query: string): Observable<any> {
+    return this.http.get(
+      this.apiUrl + `${userID}/url?skip=${query}`,
+      this.getHttpOptions()
+    );
   }
   getUserQrCode(userID: any): Observable<any> {
     return this.http.get(
