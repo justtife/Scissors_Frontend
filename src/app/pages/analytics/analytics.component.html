@@ -202,36 +202,67 @@
     </div>
     <div class="container-xl">
       <h3>Views</h3>
+
       <div class="table-responsive">
         <div class="table-wrapper">
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th>S/N</th>
-                <th>Short URL</th>
-                <th>Title</th>
-                <th>QR Code</th>
-                <th>Clicks</th>
-                <th>Tags</th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let url of urls?.urls; let i = index">
+          <div class="row mb-3">
+            <label for="filter" class="col-sm-auto col-form-label">
+              Filter by Short URL<i class="bi bi-funnel">:</i>
+            </label>
+            <div class="col-sm-auto">
+              <select
+                name="filter"
+                id="filter"
+                class="form-control"
+                [(ngModel)]="statFilter"
+                (ngModelChange)="onFilterStat($event)"
+              >
+                <option
+                  *ngFor="let url of urls?.totalUrls"
+                  [value]="url.short_url"
+                >
+                  {{ currentUrl }}/<em>{{ url.short_url }}</em>
+                </option>
+              </select>
+            </div>
+          </div>
+          <h2 class="text-center" *ngIf="!statOutput; else statTable">
+            No click has been made yet
+          </h2>
+          <ng-template #statTable
+            ><table class="table table-hover table-bordered">
+              <thead>
                 <tr>
-                  <td>{{ i + 1 }}</td>
-                  <td>
-                    <a [routerLink]="'/' + url.short_url" class="text-primary"
-                      >{{ currentUrl }}/{{ url.short_url }}</a
-                    >
-                  </td>
-                  <td>{{ url.name }}</td>
-                  <td>tap to view</td>
-                  <td>{{ url.clicks }}</td>
-                  <td>London</td>
+                  <th>S/N</th>
+                  <th>Short URL</th>
+                  <th>IP Address</th>
+                  <th>City</th>
+                  <th>Country</th>
+                  <th>Flag</th>
                 </tr>
-              </ng-container>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let stat of statOutput; let i = index">
+                  <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>
+                      <a
+                        [routerLink]="'/' + stat.short_url"
+                        class="text-primary"
+                        >{{ currentUrl }}/{{ stat.short_url }}</a
+                      >
+                    </td>
+                    <td>{{ stat.ip }}</td>
+                    <td>{{ stat.city }}</td>
+                    <td>{{ stat.countryName }}</td>
+                    <td>
+                      <img [src]="stat.countryFlag" [alt]="stat.countryName" />
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody></table
+          ></ng-template>
+
           <div class="clearfix">
             <ng-container *ngIf="paginations > 1">
               <ul class="pagination">

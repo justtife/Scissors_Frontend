@@ -17,12 +17,14 @@ export class AnalyticsComponent implements OnInit {
   qrCodeDetails: any;
   selectedFilter: string = 'shortUrl';
   tableOutput: any = {};
-
+  statFilter: string = '';
+  statOutput: any;
   constructor(private http: UrlServiceService) {}
   ngOnInit(): void {
     this.onFilterChange(this.selectedFilter);
-    this.getUserUrl();
+    this.onFilterStat(this.statFilter);
     this.getUserQrCode();
+    this.getUserUrl();
   }
   generateArray(length: number): number[] {
     return Array.from({ length }, (_, index) => index);
@@ -71,6 +73,10 @@ export class AnalyticsComponent implements OnInit {
       this.getUserQrCode();
     }
   }
+  onFilterStat(shortUrl: string) {
+    this.statFilter = shortUrl;
+    this.getStatData('1', shortUrl);
+  }
   previousPage() {
     if (this.selectedPage > 1) {
       this.getUserUrl((this.selectedPage - 1).toString());
@@ -88,5 +94,19 @@ export class AnalyticsComponent implements OnInit {
   cancelModal() {
     this.showModal = false;
     this.modalOutput = {};
+  }
+  getStatData(skip: string = '1', search?: string) {
+    const userID = localStorage.getItem('userID');
+    this.selectedPage = parseInt(skip);
+    if (userID) {
+      this.http.getUserStat(userID, skip, search).subscribe(
+        (response) => {
+          this.statOutput = response.data;
+        },
+        (error) => {
+          this.statOutput = null;
+        }
+      );
+    }
   }
 }

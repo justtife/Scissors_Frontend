@@ -41,4 +41,15 @@ export class UrlServiceService {
       this.getHttpOptions()
     );
   }
+  getUserStat(userID: any, skip?: string, search?: string) {
+    let params = new HttpParams().set('skip', skip || '1');
+    if (search) {
+      params = params.set('search', search);
+    }
+    return this.http.get<any>(this.apiUrl + `stat/${userID}`, {
+      params,
+      headers: this.getHttpOptions().headers,
+      responseType: 'json',
+    });
+  }
 }
