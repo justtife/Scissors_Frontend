@@ -7,21 +7,23 @@ import { UrlServiceService } from 'src/app/services/url-service.service';
   styleUrls: ['./analytics.component.scss'],
 })
 export class AnalyticsComponent implements OnInit {
-  ngOnInit(): void {
-    this.getUserUrl();
-    this.getUserQrCode();
-  }
   urls: any;
   paginations: any;
   showModal: boolean = false;
   currentUrl = window.location.origin.replace(/^https?:\/\//, '');
-  num = [1, 2, 3, 4];
   selectedPage: number = 0;
   modalOutput: any = { qrcode: '' };
   qrCode: any = {};
   qrCodeDetails: any;
+  selectedFilter: string = 'shortUrl';
+  tableOutput: any = {};
 
   constructor(private http: UrlServiceService) {}
+  ngOnInit(): void {
+    this.onFilterChange(this.selectedFilter);
+    this.getUserUrl();
+    this.getUserQrCode();
+  }
   generateArray(length: number): number[] {
     return Array.from({ length }, (_, index) => index);
   }
@@ -31,27 +33,42 @@ export class AnalyticsComponent implements OnInit {
     if (userID) {
       this.http.getUserUrl(userID, skip).subscribe(
         (response) => {
-          console.log(response.data);
           this.urls = response.data;
+          this.tableOutput.data = response.data.urls;
           this.paginations = Math.ceil(response.data.count / 5);
         },
         (error) => {
           this.urls = null;
+          this.tableOutput.data = null;
         }
       );
     }
   }
-  getUserQrCode() {
+  getUserQrCode(skip: string = '1') {
     const userID = localStorage.getItem('userID');
+    this.selectedPage = parseInt(skip);
     if (userID) {
-      this.http.getUserQrCode(userID).subscribe(
+      this.http.getUserQrCode(userID, skip).subscribe(
         (response) => {
           this.qrCodeDetails = response.data;
+          this.tableOutput.data = response.data.urls;
+          this.paginations = Math.ceil(response.data.count / 5);
         },
         (error) => {
           this.qrCode = null;
+          this.tableOutput.data = null;
         }
       );
+    }
+  }
+  onFilterChange(selectedValue: string) {
+    this.selectedFilter = selectedValue;
+    if (selectedValue === 'shortUrl') {
+      this.tableOutput.type = 'Short URL';
+      this.getUserUrl();
+    } else if (selectedValue === 'qrCode') {
+      this.tableOutput.type = 'Qr Code';
+      this.getUserQrCode();
     }
   }
   previousPage() {

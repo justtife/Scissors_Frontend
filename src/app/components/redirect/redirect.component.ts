@@ -26,12 +26,12 @@ export class RedirectComponent implements OnInit {
       (response) => {
         setTimeout(() => {
           window.location.href = response;
-        }, 500);
+        }, 200);
       },
       (error) => {
         setTimeout(() => {
           this.route.navigate(['not-found']);
-        }, 3000);
+        }, 1000);
       }
     );
   }

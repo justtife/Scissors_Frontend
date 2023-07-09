@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UrlServiceService {
-  private apiUrl = 'https://shortify-7orn.onrender.com/api/v1/url/'; // Replace with your API endpoint URL
+  private apiUrl = 'http://localhost:7789/api/v1/url/'; // Replace with your API endpoint URL
   constructor(private http: HttpClient) {}
   private getHttpOptions(): any {
     const token = localStorage.getItem('srstoken');
