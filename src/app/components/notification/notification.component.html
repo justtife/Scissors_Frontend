@@ -1,0 +1,12 @@
+<div style="z-index: 1050">
+  <div
+    class="alert slide-in-top d-flex align-items-center"
+    role="alert"
+    *ngIf="showAlert"
+    [ngClass]="response.type"
+  >
+    <i class="bi" [ngClass]="response.icon"></i>
+    <span class="message">{{ response.message }}</span>
+    <span class="btn-close" (click)="onCancelClick()"></span>
+  </div>
+</div>

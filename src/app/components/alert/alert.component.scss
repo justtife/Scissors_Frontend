@@ -1,3 +1,4 @@
+@import "../../variables";
 @keyframes timerAnimation {
   0% {
     width: 100%;
@@ -7,18 +8,14 @@
   }
 }
 
-.alert {
-  position: relative;
-}
-
 .timer-bar {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 3px;
-  background-color: #58de05;
-  animation: timerAnimation 5s linear forwards;
+  background-color: $tab;
+  height: 2px;
+  animation: timerAnimation 5s linear;
 }
 .slide-in-right {
   animation: slideInRight 1s ease-in-out;
@@ -33,27 +30,24 @@
   }
 }
 .alert {
+  border-radius: 3px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
-}
-
-.alert .bi {
-  margin-right: 0.5rem;
-}
-
-.alert .message {
-  flex-grow: 1;
-}
-
-.timer-bar {
-  width: 100px; /* Adjust the width as needed */
-  height: 2px;
-  background-color: #ccc;
-  margin: 0 0.5rem;
-}
-
-.btn-close {
-  margin-left: 0.5rem;
+  padding: 1rem 0.5rem;
+  height: 35px;
+  color: $bg-color;
+  border: none !important;
+  button {
+    margin-left: 20px;
+    font-size: 10px;
+  }
+  .message {
+    flex-grow: 1;
+  }
+  .bi {
+    margin-right: 0.5rem;
+  }
+  &-danger {
+    background-color: rgba(251, 101, 121, 0.918);
+  }
 }

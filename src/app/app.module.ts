@@ -17,6 +17,7 @@ import { QrcodeComponent } from './pages/qrcode/qrcode.component';
 import { SupportComponent } from './pages/support/support.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { NotificationComponent } from './components/notification/notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     SupportComponent,
     RedirectComponent,
     LoadingComponent,
+    NotificationComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
