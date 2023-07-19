@@ -1,23 +1,39 @@
-import { Component, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss'],
 })
 export class ShareComponent {
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(private metaService: Meta) {}
+  updatedImageUrl = 'https://www.w3schools.com/images/w3schools_logo_436_2.png'; // Replace with the URL of the updated image
 
   shareLink() {
-    const imageUrl =
-      'https://resizing.app/blog/how-to-resize-image-without-losing-quality/irfanview.jpg';
-    const text = 'Check out this image!';
+    this.metaService.updateTag({
+      property: 'og:image',
+      content: this.updatedImageUrl,
+    });
+    this.metaService.updateTag({
+      property: 'og:image:type',
+      content: 'image/png',
+    });
+    this.metaService.updateTag({
+      property: 'og:image:width',
+      content: '436',
+    });
+    this.metaService.updateTag({
+      property: 'og:image:height',
+      content: '228',
+    });
+
+    const text = 'Share with ease and make an impact with every click';
     const shareData = {
       title: 'Your application title',
       text,
-      url: 'https://jumia.com/shoes',
-      imageUrl,
+      url: 'scs-drab.vercel.app',
     };
+
     if (navigator.share) {
       navigator
         .share(shareData)
