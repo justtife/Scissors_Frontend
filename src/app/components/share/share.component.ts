@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 })
 export class ShareComponent {
   qrCodeImageUrl: string =
-    'https://www.w3schools.com/images/w3schools_logo_436_2.png'; // Replace with the actual QR code image URL
+    'https://res.cloudinary.com/dllgzg6si/image/upload/v1689773227/scissors_user/default_Pestino1%40gmail.com.png'; // Replace with the actual QR code image URL
 
   shareLink() {
     const text = 'Check out this image!';
