@@ -1,0 +1,6 @@
+<div *ngIf="shareContent" class="share-container">
+  <img [src]="shareContent.image" alt="Share Image" />
+  <p>{{ shareContent.text }}</p>
+</div>
+<br><br><br><br><br><br><br><br><br>
+<button (click)="share()" [disabled]="!shareContent">Share</button>

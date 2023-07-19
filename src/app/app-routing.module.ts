@@ -12,6 +12,7 @@ import { RedirectComponent } from './components/redirect/redirect.component';
 import { QrcodeComponent } from './pages/qrcode/qrcode.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { ShareComponent } from './components/share/share.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'share', component: ShareComponent },
   { path: '**', component: RedirectComponent },
 ];
 

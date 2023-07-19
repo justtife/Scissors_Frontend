@@ -18,6 +18,7 @@ import { SupportComponent } from './pages/support/support.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { ShareComponent } from './components/share/share.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { NotificationComponent } from './components/notification/notification.co
     RedirectComponent,
     LoadingComponent,
     NotificationComponent,
+    ShareComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

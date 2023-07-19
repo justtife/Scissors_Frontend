@@ -189,7 +189,11 @@
             into Sharp, Snippet-sized shareable Links with this powerful tool.
           </p>
         </div>
-        <div class="col-md-10 mx-auto col-lg-7" data-aos="zoom-in" data-aos-delay="500">
+        <div
+          class="col-md-10 mx-auto col-lg-7"
+          data-aos="zoom-in"
+          data-aos-delay="500"
+        >
           <form
             #createUrl="ngForm"
             (ngSubmit)="shortenURL()"
@@ -201,6 +205,7 @@
                 *ngIf="error.message"
                 [response]="error"
               ></app-notification>
+
               <div class="input-group">
                 <span class="input-group-text">
                   <i class="bi bi-link-45deg"></i>
@@ -367,7 +372,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 mb-4 mb-md-0">
-        <h2>About Scissors</h2>
+        <h2>About <span class="">Scissors</span></h2>
         <p class="truncate-text">
           Introducing our cutting-edge URL optimization tool! With this advanced
           solution, you can effortlessly transform lengthy and intricate URLs
