@@ -16,7 +16,7 @@ export class ShareComponent {
       title: 'Your application title',
       text,
       url: 'https://jumia.com/shoes',
-      files: [new File([imageUrl], 'image.jpg', { type: 'image/jpeg' })],
+      imageUrl,
     };
     if (navigator.share) {
       navigator
