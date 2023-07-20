@@ -250,7 +250,6 @@
                   [(ngModel)]="urlData.short_url"
                 />
               </div>
-              <app-share-link [link]="urlData.short_url"></app-share-link>
             </div>
 
             <div class="form-check my-2">
@@ -263,7 +262,7 @@
               <label class="form-check-label" for="toggleCustomUrl"
                 >Add Custom URL</label
               >
-              <div class="container my-3" *ngIf="newLink">
+              <div class="container my-3" *ngIf="true">
                 <div class="d-flex justify-content-center">
                   <div class="input-group w-50">
                     <input
@@ -281,6 +280,7 @@
                     >
                       <i class="bi" [ngClass]="clipboardIcon"></i>
                     </span>
+                    <app-share-link [link]="newLink"></app-share-link>
                   </div>
                 </div>
               </div>
