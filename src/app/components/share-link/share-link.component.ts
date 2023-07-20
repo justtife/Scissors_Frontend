@@ -16,8 +16,8 @@ export class ShareLinkComponent {
       files?: File[];
     } = {
       title: 'Scissors - URL Shortner',
-      text: 'Share with ease and make an impact with every click\n',
-      url: this.link,
+      text: 'Share with ease and make an impact with every click...\n',
+      url: `https://${this.link}`,
     };
     if (this.qrcode) {
       const file = await this.createFileFromUrl(this.qrcode);

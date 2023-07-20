@@ -199,6 +199,10 @@
                           <h6>Qr Code</h6>
                         </div>
                       </div>
+                      <app-share-link
+                        [link]="currentUrl + '/' + response.short_url"
+                        [qrcode]="response.qrcode"
+                      ></app-share-link>
                       <div class="row align-items-center my-2">
                         <div class="col-lg-3 col-md-3 label">Short URL:</div>
                         <div
