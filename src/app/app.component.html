@@ -27,14 +27,6 @@
           <ul
             class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
           >
-            <!-- <li class="dropdown-header">
-              You have a new message
-              <a href="#"
-                >
-                <span class="badge rounded-pill bg-primary p-2 ms-2"
-                  >View all</span>
-                  </a>
-            </li> -->
             <li>
               <hr class="dropdown-divider" />
             </li>
@@ -63,19 +55,19 @@
           <a class="nav-link nav-profile d-flex align-items-center pe-0">
             <img
               *ngIf="userData.profilePic; else elseBlock"
-              [src]="userData.profilePic.split(' ')[1]"
+              [src]="userData?.profilePic?.split(' ')[1]"
               alt="Profile"
               class="rounded-circle"
             />
             <ng-template #elseBlock>
               <img
-                [src]="userData.defaultPic"
+                [src]="userData?.defaultPic"
                 alt="Profile"
                 class="rounded-circle"
               />
             </ng-template>
             <span class="d-none d-md-block dropdown-toggle ps-2 text-light"
-              >{{ userData?.name.first[0] }}. {{ userData?.name.last }}</span
+              >{{ userData?.name?.first[0] }}. {{ userData?.name?.last }}</span
             > </a
           ><!-- End Profile Iamge Icon -->
           <ul
@@ -89,7 +81,7 @@
             "
           >
             <li class="dropdown-header">
-              <h6>{{ userData?.name.first }} {{ userData?.name.last }}</h6>
+              <h6>{{ userData?.name?.first }} {{ userData?.name?.last }}</h6>
               <span>{{ userData?.userID }}</span>
             </li>
             <li>

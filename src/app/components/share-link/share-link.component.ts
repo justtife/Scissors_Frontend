@@ -16,7 +16,7 @@ export class ShareLinkComponent {
       files?: File[];
     } = {
       title: 'Scissors - URL Shortner',
-      text: 'Share with ease and make an impact with every click...\n',
+      text: 'Share with ease and make an impact with every click...\n\n\n',
       url: `https://${this.link}`,
     };
     if (this.qrcode) {

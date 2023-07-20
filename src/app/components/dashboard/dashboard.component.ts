@@ -40,9 +40,8 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('userID');
     this.loading = true;
     this.http.logout().subscribe((response) => {
-      setTimeout(() => {
-        this.route.navigate(['/home']);
-      }, 1000);
+      this.http.setLoginStatus(false);
+      this.route.navigate(['/home']);
     });
   }
 }

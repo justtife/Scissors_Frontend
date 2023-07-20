@@ -7,14 +7,27 @@ import { UserService } from 'src/app/services/user-service.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  userData: any;
+  userData: any = {};
   loggedIn: boolean = false;
   isDropdownVisible: boolean = false;
-
   constructor(private route: Router, private http: UserService) {}
   ngOnInit() {
-    setTimeout(() => {
-      this.getAUser();
+    const token = localStorage.getItem('srstoken');
+    this.loggedIn = false;
+    if (token) {
+      const isValidToken = this.http.isLoggedIn(token as string);
+      if (isValidToken) {
+        this.loggedIn = true;
+        this.getAUser();
+      }
+    }
+    this.http.loginStatusSubject.subscribe((status) => {
+      if (status === true) {
+        this.getAUser();
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
     });
   }
   getAUser() {
@@ -33,7 +46,6 @@ export class AppComponent implements OnInit {
       this.loggedIn = false;
     }
   }
-
   toggleDropdown(): void {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
@@ -41,9 +53,8 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('srstoken');
     localStorage.removeItem('userID');
     this.http.logout().subscribe((response) => {
-      setTimeout(() => {
-        this.route.navigate(['/home']);
-      }, 2000);
+      this.loggedIn = false;
+      this.route.navigate(['/home']);
     });
   }
 }

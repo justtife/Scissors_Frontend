@@ -59,16 +59,12 @@ export class SignupComponent implements OnInit {
     }
     requestObservable.subscribe(
       (response: any) => {
-        this.response.message = response.message;
-        this.response.type = 'alert-success';
-        this.response.icon = 'bi-hand-thumbs-up';
         localStorage.setItem('srstoken', response.token);
         localStorage.setItem('userID', response.data.userID);
         // Navigate and reset isSubmitting after 3 seconds
-        setTimeout(() => {
-          this.route.navigate(['/dashboard']);
-          this.isSubmitting = false;
-        }, 3000);
+        this.http.setLoginStatus(true);
+        this.route.navigate(['/dashboard']);
+        this.isSubmitting = false;
       },
       (error: any) => {
         this.response.message = error.error.message;
