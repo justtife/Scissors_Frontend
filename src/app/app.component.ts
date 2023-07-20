@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { SessionService } from './services/session.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user-service.service';
 @Component({
@@ -10,8 +11,25 @@ export class AppComponent implements OnInit {
   userData: any = {};
   loggedIn: boolean = false;
   isDropdownVisible: boolean = false;
-  constructor(private route: Router, private http: UserService) {}
+  private timeOutFlag: boolean = false;
+  constructor(
+    private route: Router,
+    private http: UserService,
+    private sessionService: SessionService
+  ) {}
+  @HostListener('window:mousemove')
+  @HostListener('window:keydown')
   ngOnInit() {
+    setInterval(() => {
+      if (this.sessionService.isTimedOut() && !this.timeOutFlag) {
+        this.loggedIn = false;
+        localStorage.removeItem('srstoken');
+        localStorage.removeItem('userID');
+        console.log('test');
+        this.route.navigate(['/login']);
+        this.timeOutFlag = true;
+      }
+    }, 1000);
     const token = localStorage.getItem('srstoken');
     this.loggedIn = false;
     if (token) {
@@ -29,6 +47,10 @@ export class AppComponent implements OnInit {
         this.loggedIn = false;
       }
     });
+  }
+  resetSessionTimer(): void {
+    this.sessionService.resetTimer();
+    this.timeOutFlag = false;
   }
   getAUser() {
     let userID = localStorage.getItem('userID');

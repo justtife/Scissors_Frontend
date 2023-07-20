@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import jwtDecode from 'jwt-decode';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 const httpOptions = {
   headers: new HttpHeaders({
     Accept: 'application/json',
@@ -16,7 +17,7 @@ export class UserService {
   private mainUrl = 'https://shortify-7orn.onrender.com/'; // Replace with your API endpoint URL
   private countryURL = 'https://restcountries.com/v3.1/all';
   public loginStatusSubject = new Subject<boolean>();
-
+  helper = new JwtHelperService();
   constructor(private http: HttpClient) {}
   private getHttpOptions(): any {
     const token = localStorage.getItem('srstoken');
@@ -39,17 +40,10 @@ export class UserService {
   }
   // Method to check if the user is logged in
   isLoggedIn(token: string): boolean {
-    try {
-      if (token) {
-        const decodedToken: any = jwtDecode(token as string);
-        const currentTime = Date.now() / 1000; // Convert to seconds
-        return decodedToken.exp > currentTime;
-      }
-      return false;
-    } catch (error) {
-      console.error('Error decoding JWT:', error);
-      return false;
+    if (token) {
+      return !this.helper.isTokenExpired(token);
     }
+    return false;
   }
   getUser(userID: string): Observable<any> {
     return this.http.get(this.apiUrl + userID, this.getHttpOptions());
