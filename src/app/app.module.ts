@@ -18,7 +18,7 @@ import { SupportComponent } from './pages/support/support.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NotificationComponent } from './components/notification/notification.component';
-import { ShareComponent } from './components/share/share.component';
+import { ShareLinkComponent } from './components/share-link/share-link.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +36,7 @@ import { ShareComponent } from './components/share/share.component';
     RedirectComponent,
     LoadingComponent,
     NotificationComponent,
-    ShareComponent,
+    ShareLinkComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

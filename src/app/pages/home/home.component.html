@@ -205,7 +205,6 @@
                 *ngIf="error.message"
                 [response]="error"
               ></app-notification>
-
               <div class="input-group">
                 <span class="input-group-text">
                   <i class="bi bi-link-45deg"></i>
@@ -251,6 +250,7 @@
                   [(ngModel)]="urlData.short_url"
                 />
               </div>
+              <app-share-link [link]="urlData.short_url"></app-share-link>
             </div>
 
             <div class="form-check my-2">
